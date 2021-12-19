@@ -1,0 +1,17 @@
+query findAll {
+  todos {
+    id
+    title
+    description
+    status
+  }
+}
+
+mutation create($todo: CreateTodoDto!) {
+  create(todo: $todo) {
+    id
+    title
+    description
+    status
+  }
+}
