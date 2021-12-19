@@ -1,18 +1,24 @@
-import type { FormEvent, VFC } from "react";
+import { FormEvent, useRef, VFC } from "react";
 import { FindAllDocument, useCreateMutation } from "../../../apollo/generated/hooks";
 
 export const TodoForm: VFC = () => {
+  const titleRef = useRef<HTMLInputElement | null>(null);
+  const descriptionRef = useRef<HTMLInputElement | null>(null);
   const [createTodo] = useCreateMutation({ refetchQueries: [FindAllDocument] });
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createTodo({
+    if (!titleRef.current || !descriptionRef.current) return;
+    await createTodo({
       variables: {
         todo: {
-          title: "title",
-          description: "description",
+          title: titleRef.current.value,
+          description: descriptionRef.current.value,
         },
       },
     });
+    titleRef.current.value = "";
+    descriptionRef.current.value = "";
   };
 
   return (
@@ -23,11 +29,11 @@ export const TodoForm: VFC = () => {
         </legend>
         <div>
           <label htmlFor="title">Title:</label>
-          <input type="text" required />
+          <input type="text" required ref={titleRef} />
         </div>
         <div>
           <label htmlFor="title">Description:</label>
-          <input type="text" />
+          <input type="text" ref={descriptionRef} />
         </div>
       </fieldset>
       <button type="submit">Submit</button>
