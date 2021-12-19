@@ -1,9 +1,9 @@
 import type { VFC } from "react";
-import { useFindAllQuery } from "../../../apollo/generated/hooks";
 import { TodoItem } from "../TodoItem";
+import { useHooks } from "./hooks";
 
 export const TodoList: VFC = () => {
-  const { data, loading, error } = useFindAllQuery();
+  const { data, loading, error } = useHooks();
 
   if (loading) return <div>isLoading...</div>;
   if (error) return <div>Something Wrong,,,</div>;
