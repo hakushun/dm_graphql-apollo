@@ -1,5 +1,6 @@
 import type { VFC } from "react";
 import { useFindAllQuery } from "../../../apollo/generated/hooks";
+import { TodoItem } from "../TodoItem";
 
 export const TodoList: VFC = () => {
   const { data, loading, error } = useFindAllQuery();
@@ -11,14 +12,7 @@ export const TodoList: VFC = () => {
     <section>
       <h2>Todo List</h2>
       <ul>
-        {data?.todos?.map((todo) => (
-          <li key={todo?.id}>
-            <span>{todo?.title}</span>
-            <span>{todo?.description}</span>
-            <span>{todo?.status}</span>
-            <button type="button">delete</button>
-          </li>
-        ))}
+        {data && data.todos && data.todos.map((todo) => <TodoItem key={todo?.id} todo={todo} />)}
       </ul>
     </section>
   );
