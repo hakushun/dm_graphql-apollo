@@ -6,9 +6,9 @@ type Props = {
 };
 export const Layout: VFC<Props> = ({ children }) => {
   return (
-    <div id="app">
+    <div id="app" className="flex flex-col min-h-screen">
       <Header />
-      <main>{children}</main>
+      <main className="flex-1 bg-red-50">{children}</main>
     </div>
   );
 };
