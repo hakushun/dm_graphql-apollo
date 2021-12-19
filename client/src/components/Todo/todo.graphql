@@ -15,3 +15,16 @@ mutation create($todo: CreateTodoDto!) {
     status
   }
 }
+
+mutation updateStatus($todo: UpdateStatusDto!) {
+  updateStatus(todo: $todo) {
+    id
+    status
+  }
+}
+
+mutation delete($todoId: DeleteTodoDto!) {
+  delete(todoId: $todoId) {
+    id
+  }
+}
