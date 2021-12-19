@@ -23,8 +23,8 @@ type Mutation {
 }
 
 type Query {
-  findAll: [Todo]!
-  findOneById(id: ID!): Todo!
+  todo(id: ID!): Todo!
+  todos: [Todo]!
 }
 
 type Todo {

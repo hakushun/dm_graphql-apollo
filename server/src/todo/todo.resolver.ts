@@ -9,12 +9,12 @@ import { TodoService } from './todo.service';
 export class TodoResolver {
   constructor(private todoService: TodoService) {}
 
-  @Query(() => [Todo], { nullable: 'items' })
+  @Query(() => [Todo], { name: 'todos', nullable: 'items' })
   findAll() {
     return this.todoService.findAll();
   }
 
-  @Query(() => Todo)
+  @Query(() => Todo, { name: 'todo' })
   findOneById(@Args('id', { type: () => ID }) id: string) {
     return this.todoService.findOneById(id);
   }
